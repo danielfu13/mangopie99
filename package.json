@@ -1,0 +1,27 @@
+{
+  "name": "mangopie99(1)",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielfu13/mangopie99.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielfu13/mangopie99/issues"
+  },
+  "homepage": "https://github.com/danielfu13/mangopie99#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^9.0.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3"
+  }
+}
