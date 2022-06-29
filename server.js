@@ -1,6 +1,6 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const inquirer = require("inquirer");
-const consoleTable = require("consoleTable");
+const consoleTable = require("console.table");
 // const Connection = require("mysql2/typings/mysql/lib/Connection");
 
 var chooseRole = [];
@@ -27,7 +27,7 @@ function chooseFunction() {
   inquirer
   .prompt({
     type: "list",
-    name: "function",
+    name: "selection",
     message: "What would you like to do?",
     choices: [
       "View all departments",
@@ -70,7 +70,7 @@ function chooseFunction() {
 
   }
   else{
-    connection.end();
+    db.end();
   }
 });
 }
@@ -78,10 +78,10 @@ function chooseFunction() {
 function viewDepart() {
   db.query (
     "SELECT * FROM department", 
-    function(err, results, fields) {
+    function(err, result, fields) {
       if (err) throw err;
       console.table(result);
-      runSearch();
+      chooseFunction();
     }
   );
 };
@@ -92,7 +92,7 @@ function viewRole() {
     function(err, result, fields) {
       if (err) throw err;
       console.table(result);
-      runSearch(); 
+      chooseFunction(); 
     }
   );
 };
@@ -103,7 +103,7 @@ function viewEmployee() {
     function(err, result, fields) {
       if (err) throw err;
       console.table(result);
-      runSearch(); 
+      chooseFunction(); 
     }
   );
 };
@@ -154,7 +154,7 @@ function addDepart() {
     db.query(query, function(err, res) {
       console.log(`-------new department added: ${answer.dept}-------`)
     });
-    runSearch();
+    chooseFunction();
   });
   };
 
@@ -186,14 +186,14 @@ function addRole() {
   
    ]).then(function(answer) {
      console.log(`${answer.role}`)
-    var getDeptId =answer.dept.split("-")
+    var getDeptId =answer.depart.split("-")
     var query = 
     `INSERT INTO role (title, salary, department_id)
      VALUES ('${answer.role}','${answer.salary}','${getDeptId[0]}')`;
     db.query(query, function(err, res) {
       console.log(`<br>-----new role ${answer.role} added!------`)
     });
-    runSearch();
+    chooseFunction();
   });
 };
 
@@ -232,20 +232,20 @@ function addEmployee() {
   
   ]).then(function(answer) {
     var getRoleId =answer.role.split("-")
-    var getReportingToId=answer.reportingTo.split("-")
+    var getReportingToId=answer.employeemanager.split("-")
     var query = 
     `INSERT INTO employee (first_name, last_name, role_id, manager_id)
     VALUES ('${answer.firstname}','${answer.lastname}','${getRoleId[0]}','${getReportingToId[0]}')`;
   db.query(query, function(err, res) {
     console.log(`new employee ${answer.firstname} ${answer.lastname} added!`)
     });
-    runSearch();
+    chooseFunction();
   });
 };
 
 
 function updateRole() {
-  connection.query('SELECT * FROM employee', function (err, result) {
+  db.query('SELECT * FROM employee', function (err, result) {
     if (err) throw (err);
     inquirer
       .prompt([
@@ -299,8 +299,9 @@ function updateRole() {
               db.query(query, values,
                 function (err, res, fields) {
                   console.log(`You have updated ${name}'s role to ${role}.`)
+                  chooseFunction();
                 })
-              viewAll();
+              
             })
           })
         } 

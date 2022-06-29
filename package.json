@@ -20,8 +20,7 @@
   "homepage": "https://github.com/danielfu13/mangopie99#readme",
   "dependencies": {
     "console.table": "^0.10.0",
-    "inquirer": "^9.0.0",
-    "mysql": "^2.18.1",
+    "inquirer": "^7.0.0",
     "mysql2": "^2.3.3"
   }
 }
