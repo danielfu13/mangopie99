@@ -14,6 +14,8 @@
 
   This project is an employee tracker. The purpose of this project is to create an interface that allows non-developers to easily view and interact with information stored in databases. In this project, I create an employee tracker that allows users to view and edit employee data as they see fit. I used different databases such as Node.js, Inquirer, and MySQL.
 
+[Video on how to use the application](https://drive.google.com/file/d/1bLVI_rahbZIWXzAcEADnGtw8gAmSHYaa/view)
+
   ## Installation 
 
 Download the zip file and open the file in a terminal. 
